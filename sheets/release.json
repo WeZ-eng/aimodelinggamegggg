@@ -3,20 +3,93 @@
   "about": "What goes into the Melty release and where it lands. ModEngine2 is installed by Melty itself (game_info: modengine2, mod folder {managed}/modengine2/mod).",
   "key": "id",
   "columns": {
-    "id": {"type": "str"},
-    "file": {"type": "str"},
-    "made_by": {"type": "str"},
-    "license": {"type": "str"},
-    "ships": {"type": "enum", "values": ["bundled", "melty_loader", "excluded"]},
-    "destination": {"type": "str", "doc": "Melty path token form"}
+    "id": {
+      "type": "str"
+    },
+    "file": {
+      "type": "str"
+    },
+    "made_by": {
+      "type": "str"
+    },
+    "license": {
+      "type": "str"
+    },
+    "ships": {
+      "type": "enum",
+      "values": [
+        "bundled",
+        "melty_loader",
+        "excluded"
+      ]
+    },
+    "destination": {
+      "type": "str",
+      "doc": "Melty path token form"
+    }
   },
   "rows": [
-    {"id": "modengine2", "file": "(installed by Melty)", "made_by": "soulsmods", "license": "MIT", "ships": "melty_loader", "destination": "{managed}/modengine2"},
-    {"id": "mod_dll", "file": "lands_between_dungeons.dll", "made_by": "this project", "license": null, "ships": "bundled", "destination": null},
-    {"id": "mod_config", "file": "lands_between_dungeons.toml", "made_by": "this project", "license": null, "ships": "bundled", "destination": null},
-    {"id": "seamless_coop", "file": "SeamlessCoop/ersc.dll + ersc_settings.ini", "made_by": "LukeYui", "license": null, "ships": "bundled", "destination": null},
-    {"id": "fromsoftware_rs", "file": "(compiled into the DLL)", "made_by": "vswarte and contributors", "license": "MIT OR Apache-2.0", "ships": "bundled", "destination": "inside lands_between_dungeons.dll"},
-    {"id": "hudhook", "file": "(compiled into the DLL)", "made_by": "veeenu", "license": "MIT", "ships": "bundled", "destination": "inside lands_between_dungeons.dll",
-     "_verify": {"license": "crate metadata of the version used"}}
+    {
+      "id": "modengine2",
+      "file": "(installed by Melty)",
+      "made_by": "soulsmods",
+      "license": "MIT",
+      "ships": "melty_loader",
+      "destination": "{managed}/modengine2"
+    },
+    {
+      "id": "mod_dll",
+      "file": "lands_between_dungeons/lands_between_dungeons.dll",
+      "made_by": "this project",
+      "license": null,
+      "ships": "bundled",
+      "destination": "{managed}/modengine2/lands_between_dungeons"
+    },
+    {
+      "id": "me2_config",
+      "file": "config_eldenring.toml",
+      "made_by": "this project",
+      "license": null,
+      "ships": "bundled",
+      "destination": "{managed}/modengine2",
+      "_verify": {
+        "destination": "Melty Test: ModEngine2 reads this config and loads the DLL (log.txt appears)"
+      }
+    },
+    {
+      "id": "mod_config",
+      "file": "lands_between_dungeons/lands_between_dungeons.toml",
+      "made_by": "this project",
+      "license": null,
+      "ships": "bundled",
+      "destination": "{managed}/modengine2/lands_between_dungeons"
+    },
+    {
+      "id": "seamless_coop",
+      "file": "SeamlessCoop/ersc.dll + ersc_settings.ini",
+      "made_by": "LukeYui",
+      "license": "LukeYui: no redistribution without permission",
+      "ships": "excluded",
+      "destination": "(not shipped)"
+    },
+    {
+      "id": "fromsoftware_rs",
+      "file": "(compiled into the DLL)",
+      "made_by": "vswarte and contributors",
+      "license": "MIT OR Apache-2.0",
+      "ships": "bundled",
+      "destination": "inside lands_between_dungeons.dll"
+    },
+    {
+      "id": "hudhook",
+      "file": "(compiled into the DLL)",
+      "made_by": "veeenu",
+      "license": "MIT",
+      "ships": "bundled",
+      "destination": "inside lands_between_dungeons.dll",
+      "_verify": {
+        "license": "crate metadata of the version used"
+      }
+    }
   ]
 }

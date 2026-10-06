@@ -3,22 +3,76 @@
   "about": "Playing together. Elden Ring's own online play runs with Easy Anti-Cheat and is never used. Co-op runs through Seamless Co-op by LukeYui, loaded by ModEngine2, offline from FromSoftware's servers, over Steam's relayed networking.",
   "key": "id",
   "columns": {
-    "id": {"type": "str"},
-    "what": {"type": "str"},
-    "value": {"type": "str"},
-    "source": {"type": "str"}
+    "id": {
+      "type": "str"
+    },
+    "what": {
+      "type": "str"
+    },
+    "value": {
+      "type": "str"
+    },
+    "source": {
+      "type": "str"
+    }
   },
   "rows": [
-    {"id": "provider", "what": "Co-op mod", "value": "Seamless Co-op (ersc.dll) by LukeYui", "source": "https://www.nexusmods.com/eldenring/mods/510"},
-    {"id": "version", "what": "Seamless Co-op build that runs on Elden Ring 1.17.1", "value": null, "source": "Nexus page, files tab"},
-    {"id": "redistribution", "what": "Does LukeYui's permission allow bundling ersc.dll in a Melty release?", "value": null, "source": "Nexus page, permissions and credits"},
-    {"id": "max_players", "what": "Players in one session", "value": "4", "source": "dsogaming / LukeYui announcement",
-     "_verify": {"value": "Seamless Co-op settings file on the user's PC"}},
-    {"id": "join_method", "what": "How friends join", "value": "In game: everyone sets the same session password in Seamless Co-op's settings; host uses Tiny Great Pot, guests use Effigy of Malenia", "source": "Seamless Co-op readme",
-     "_verify": {"value": "readme in the downloaded build"}},
-    {"id": "connect_address_in_log", "what": "Does hosting write an address Melty can read?", "value": "no: sessions go through Steam lobbies, so Melty's connect section stays out; maxPlayers only", "source": "design"},
-    {"id": "mod_parity", "what": "What must match between players", "value": "same mashup release (DLL + config) and same Seamless Co-op build", "source": "Seamless Co-op requires identical regulation; this mod edits nothing on disk"},
-    {"id": "save_separation", "what": "Save files", "value": "Seamless Co-op uses ER0000.co2; the mashup's own data is in %APPDATA%/LandsBetweenDungeons", "source": "Seamless Co-op readme",
-     "_verify": {"value": "on the user's PC"}}
+    {
+      "id": "provider",
+      "what": "Co-op mod",
+      "value": "Seamless Co-op (ersc.dll) by LukeYui",
+      "source": "https://www.nexusmods.com/eldenring/mods/510"
+    },
+    {
+      "id": "version",
+      "what": "Seamless Co-op build that runs on Elden Ring 1.17.1",
+      "value": null,
+      "source": "Nexus page, files tab"
+    },
+    {
+      "id": "redistribution",
+      "what": "Does LukeYui's permission allow bundling ersc.dll in a Melty release?",
+      "value": "no: 'You are not allowed to upload this file to other sites under any circumstances' and 'do not modify, repackage, or redistribute this mod anywhere without my permission'",
+      "source": "https://www.nexusmods.com/eldenring/mods/510 (permissions and FAQ), read 2026-10-06"
+    },
+    {
+      "id": "max_players",
+      "what": "Players in one session",
+      "value": "4",
+      "source": "dsogaming / LukeYui announcement",
+      "_verify": {
+        "value": "Seamless Co-op settings file on the user's PC"
+      }
+    },
+    {
+      "id": "join_method",
+      "what": "How friends join",
+      "value": "In game: everyone sets the same session password in Seamless Co-op's settings; host uses Tiny Great Pot, guests use Effigy of Malenia",
+      "source": "Seamless Co-op readme",
+      "_verify": {
+        "value": "readme in the downloaded build"
+      }
+    },
+    {
+      "id": "connect_address_in_log",
+      "what": "Does hosting write an address Melty can read?",
+      "value": "no: sessions go through Steam lobbies, so Melty's connect section stays out; maxPlayers only",
+      "source": "design"
+    },
+    {
+      "id": "mod_parity",
+      "what": "What must match between players",
+      "value": "same mashup release (DLL + config) and same Seamless Co-op build",
+      "source": "Seamless Co-op requires identical regulation; this mod edits nothing on disk"
+    },
+    {
+      "id": "save_separation",
+      "what": "Save files",
+      "value": "Seamless Co-op uses ER0000.co2; the mashup's own data is in %APPDATA%/LandsBetweenDungeons",
+      "source": "Seamless Co-op readme",
+      "_verify": {
+        "value": "on the user's PC"
+      }
+    }
   ]
 }
