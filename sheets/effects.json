@@ -1,0 +1,43 @@
+{
+  "sheet": "effects",
+  "about": "Vanilla Elden Ring data rows the mashup reuses at runtime. Nothing here is shipped: the mod refers to these IDs in the player's own regulation. Names from soulsmods/Paramdex ER/Names (2026-03). 'mod' rows are effects the DLL implements itself.",
+  "key": "id",
+  "columns": {
+    "id": {"type": "str"},
+    "param": {"type": "enum", "values": ["Bullet", "SpEffectParam", "EquipParamGoods", "mod"]},
+    "row_id": {"type": "int"},
+    "paramdex_name": {"type": "str"}
+  },
+  "rows": [
+    {"id": "none", "param": "mod", "row_id": 0, "paramdex_name": "(no game row: effect done by the DLL)"},
+
+    {"id": "goods_giantsflame_fire_pot", "param": "EquipParamGoods", "row_id": 302, "paramdex_name": "Giantsflame Fire Pot"},
+    {"id": "goods_ancient_dragons_lightning_strike", "param": "EquipParamGoods", "row_id": 6910, "paramdex_name": "[Incantation] Ancient Dragons' Lightning Strike"},
+    {"id": "goods_comet_azur", "param": "EquipParamGoods", "row_id": 4200, "paramdex_name": "[Sorcery] Comet Azur"},
+    {"id": "goods_explosive_ghostflame", "param": "EquipParamGoods", "row_id": 5010, "paramdex_name": "[Sorcery] Explosive Ghostflame"},
+    {"id": "goods_rejection", "param": "EquipParamGoods", "row_id": 6400, "paramdex_name": "[Incantation] Rejection"},
+    {"id": "goods_blessings_boon", "param": "EquipParamGoods", "row_id": 6430, "paramdex_name": "[Incantation] Blessing's Boon"},
+    {"id": "goods_great_heal", "param": "EquipParamGoods", "row_id": 6422, "paramdex_name": "[Incantation] Great Heal"},
+    {"id": "goods_boiled_crab", "param": "EquipParamGoods", "row_id": 820, "paramdex_name": "Boiled Crab"},
+
+    {"id": "bullet_giantsflame_fire_pot", "param": "Bullet", "row_id": 10030200, "paramdex_name": "Giantsflame Fire Pot",
+     "_verify": {"row_id": "in game: spawn_bullet returns Ok and the pot explodes on hit"}},
+    {"id": "bullet_ancient_dragons_lightning_strike", "param": "Bullet", "row_id": 10691000, "paramdex_name": "Ancient Dragons' Lightning Strike",
+     "_verify": {"row_id": "in game: bolt lands at the cursor point when spawned there"}},
+    {"id": "bullet_comet_azur_constant", "param": "Bullet", "row_id": 10420002, "paramdex_name": "Comet Azur - Constant Projectile",
+     "_verify": {"row_id": "in game: re-spawning every 0.1 s reads as a continuous beam"}},
+    {"id": "bullet_explosive_ghostflame", "param": "Bullet", "row_id": 10501000, "paramdex_name": "Explosive Ghostflame",
+     "_verify": {"row_id": "in game: burst centred on the player damages nearby enemies"}},
+    {"id": "bullet_rejection", "param": "Bullet", "row_id": 10640000, "paramdex_name": "Rejection",
+     "_verify": {"row_id": "in game: pushes enemies away from the player"}},
+    {"id": "bullet_blessings_boon", "param": "Bullet", "row_id": 10643000, "paramdex_name": "Blessing's Boon",
+     "_verify": {"row_id": "in game: heals the caster and co-op partners in range over time"}},
+    {"id": "bullet_great_heal", "param": "Bullet", "row_id": 10642200, "paramdex_name": "Great Heal",
+     "_verify": {"row_id": "in game: heals the caster and co-op partners in range"}},
+
+    {"id": "sp_boiled_crab", "param": "SpEffectParam", "row_id": 500820, "paramdex_name": "[Item] Boiled Crab",
+     "_verify": {"row_id": "in game: apply_speffect shows the Boiled Crab buff icon"}},
+    {"id": "sp_hp_burn", "param": "SpEffectParam", "row_id": 29001, "paramdex_name": "NPC: HP Burn on Hit",
+     "_verify": {"row_id": "in game: applied to an enemy, it burns that enemy (not the player)"}}
+  ]
+}

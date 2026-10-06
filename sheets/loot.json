@@ -1,0 +1,28 @@
+{
+  "sheet": "loot",
+  "about": "When an enemy killed by the local player drops Dungeons loot. A drop is a coloured beam at the body; walk into it to pick it up. Enemy strength is read from max HP because Elden Ring has no elite flag the mod can read.",
+  "key": "id",
+  "columns": {
+    "id": {"type": "str"},
+    "source": {"type": "str"},
+    "first_kill_only": {"type": "bool"},
+    "min_enemy_max_hp": {"type": "int"},
+    "max_enemy_max_hp": {"type": "int"},
+    "chance_pct": {"type": "float"},
+    "min_rarity": {"type": "ref", "ref": "rarity"},
+    "w_artifact": {"type": "int"},
+    "w_weapon_enchant": {"type": "int"},
+    "w_armor_enchant": {"type": "int"},
+    "pickup_radius_m": {"type": "float"},
+    "beam_ttl_s": {"type": "float"}
+  },
+  "rows": [
+    {"id": "first_kill", "source": "The first enemy a character kills with the mod on (the first-minute moment)", "first_kill_only": true, "min_enemy_max_hp": 0, "max_enemy_max_hp": 2147483647, "chance_pct": 100.0, "min_rarity": "rare", "w_artifact": 1, "w_weapon_enchant": 0, "w_armor_enchant": 0, "pickup_radius_m": 1.6, "beam_ttl_s": 600.0},
+    {"id": "enemy", "source": "Ordinary enemy", "first_kill_only": false, "min_enemy_max_hp": 0, "max_enemy_max_hp": 1499, "chance_pct": 8.0, "min_rarity": "common", "w_artifact": 35, "w_weapon_enchant": 40, "w_armor_enchant": 25, "pickup_radius_m": 1.6, "beam_ttl_s": 180.0,
+     "_verify": {"max_enemy_max_hp": "balance pass in game: Limgrave soldiers vs knights"}},
+    {"id": "strong_enemy", "source": "Knights, trolls, field elites", "first_kill_only": false, "min_enemy_max_hp": 1500, "max_enemy_max_hp": 7999, "chance_pct": 35.0, "min_rarity": "common", "w_artifact": 35, "w_weapon_enchant": 40, "w_armor_enchant": 25, "pickup_radius_m": 1.6, "beam_ttl_s": 300.0,
+     "_verify": {"min_enemy_max_hp": "balance pass in game"}},
+    {"id": "boss", "source": "Bosses and field bosses", "first_kill_only": false, "min_enemy_max_hp": 8000, "max_enemy_max_hp": 2147483647, "chance_pct": 100.0, "min_rarity": "rare", "w_artifact": 50, "w_weapon_enchant": 30, "w_armor_enchant": 20, "pickup_radius_m": 2.0, "beam_ttl_s": 900.0,
+     "_verify": {"min_enemy_max_hp": "in game: Margit and Tree Sentinel register as bosses, a troll does not"}}
+  ]
+}

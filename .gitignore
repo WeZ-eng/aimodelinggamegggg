@@ -1,0 +1,3 @@
+mod/target/
+*.tmp
+__pycache__/

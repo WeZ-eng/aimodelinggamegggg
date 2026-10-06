@@ -1,0 +1,3 @@
+# Lands Between Dungeons: player preferences. Keys and balance come from the design sheets.
+# Start every session in the Dungeons (top-down) view. F5 switches views in game.
+start_in_dungeons_view = true

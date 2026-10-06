@@ -1,0 +1,225 @@
+{
+  "sheet": "hooks",
+  "about": "Every place the DLL touches the running game. Elden Ring 1.17.1 (exe 2.7.1.0) only: fromsoftware-rs main @59fbd3b ships RVAs for that build. Nothing is patched on disk; ModEngine2 loads the DLL.",
+  "key": "id",
+  "columns": {
+    "id": {
+      "type": "str"
+    },
+    "game_object": {
+      "type": "str"
+    },
+    "access": {
+      "type": "enum",
+      "values": [
+        "read",
+        "write",
+        "call",
+        "draw",
+        "os"
+      ]
+    },
+    "task_group": {
+      "type": "enum",
+      "values": [
+        "FrameBegin",
+        "ChrIns_PostPhysics",
+        "DrawParamUpdate",
+        "boot",
+        "overlay",
+        "any"
+      ]
+    },
+    "crate_api": {
+      "type": "str"
+    },
+    "purpose": {
+      "type": "str"
+    }
+  },
+  "rows": [
+    {
+      "id": "game_version",
+      "game_object": "eldenring.exe version resource",
+      "access": "read",
+      "task_group": "boot",
+      "crate_api": "eldenring git main @59fbd3b (Ww2710 = exe 2.7.1.0, Jp2711); crates.io 0.14.0 only knows 2.6.2.0, so the git pin is required",
+      "purpose": "Check the exe version ourselves first; on any other build log it and stay inactive instead of panicking"
+    },
+    {
+      "id": "task_runner",
+      "game_object": "CSTask",
+      "access": "call",
+      "task_group": "boot",
+      "crate_api": "CSTaskImp::wait_for_instance + run_recurring",
+      "purpose": "Run the mod's per-frame tasks inside the game loop",
+      "_verify": {
+        "crate_api": "in game: boot gate per field note (window visible, then fresh singleton scan)"
+      }
+    },
+    {
+      "id": "main_player",
+      "game_object": "WorldChrMan.main_player (PlayerIns)",
+      "access": "read",
+      "task_group": "any",
+      "crate_api": "WorldChrMan::instance",
+      "purpose": "Player position, orientation, handle, game data"
+    },
+    {
+      "id": "player_game_data",
+      "game_object": "PlayerIns.player_game_data",
+      "access": "write",
+      "task_group": "FrameBegin",
+      "crate_api": "PlayerGameData.current_fp / current_hp / character_name / equipment.chr_asm",
+      "purpose": "FP cost of artifacts, heals, equipped gear handles, save key",
+      "_verify": {
+        "access": "in game: writing current_fp sticks for one frame and the FP bar follows"
+      }
+    },
+    {
+      "id": "follow_camera",
+      "game_object": "WorldChrMan.chr_cam (ChrCam.pers_cam.matrix)",
+      "access": "write",
+      "task_group": "FrameBegin",
+      "crate_api": "ChrCam",
+      "purpose": "Pin the follow camera's yaw to the Dungeons yaw so movement is screen-relative",
+      "_verify": {
+        "access": "in game: W moves up the screen at every player facing"
+      }
+    },
+    {
+      "id": "render_camera",
+      "game_object": "CSCamera.pers_cam_1 (CSCam.matrix, fov)",
+      "access": "write",
+      "task_group": "DrawParamUpdate",
+      "crate_api": "CSCamera::instance_mut",
+      "purpose": "Draw the world from the Dungeons camera",
+      "_verify": {
+        "task_group": "in game: DrawParamUpdate runs after CameraStep and before the frame is drawn (no one-frame jitter)"
+      }
+    },
+    {
+      "id": "player_orientation",
+      "game_object": "PlayerIns.chr_ins.modules.physics.orientation",
+      "access": "write",
+      "task_group": "ChrIns_PostPhysics",
+      "crate_api": "CSChrPhysicsModule.orientation",
+      "purpose": "Turn the character toward the cursor when attacking",
+      "_verify": {
+        "access": "in game: the swing goes toward the cursor (TAE turn may override)"
+      }
+    },
+    {
+      "id": "phys_raycast",
+      "game_object": "CSHavokMan.phys_world",
+      "access": "call",
+      "task_group": "DrawParamUpdate",
+      "crate_api": "CSPhysWorld::cast_ray",
+      "purpose": "Cursor ground point and ceiling avoidance",
+      "_verify": {
+        "crate_api": "in game: filter value that hits map collision (field note: 0x2000058)"
+      }
+    },
+    {
+      "id": "bullet_spawn",
+      "game_object": "CSBulletManager",
+      "access": "call",
+      "task_group": "FrameBegin",
+      "crate_api": "CSBulletManager::spawn_bullet (BulletSpawnData mirrored with the same layout)",
+      "purpose": "Artifacts that throw, call or burst",
+      "_verify": {
+        "crate_api": "in game: Ok(()) and a visible projectile"
+      }
+    },
+    {
+      "id": "speffect_apply",
+      "game_object": "ChrIns",
+      "access": "call",
+      "task_group": "FrameBegin",
+      "crate_api": "ChrInsExt::apply_speffect",
+      "purpose": "Buff artifacts and Fire Aspect"
+    },
+    {
+      "id": "enemy_list",
+      "game_object": "WorldChrMan.chr_inses_by_distance",
+      "access": "read",
+      "task_group": "ChrIns_PostPhysics",
+      "crate_api": "ChrInsDistanceEntry",
+      "purpose": "Find enemies the player hit or killed, and enemies near the player",
+      "_verify": {
+        "crate_api": "in game: list holds every loaded enemy near the player"
+      }
+    },
+    {
+      "id": "enemy_hp",
+      "game_object": "ChrIns.modules.data.hp / max_hp, ChrIns.last_hit_by",
+      "access": "write",
+      "task_group": "ChrIns_PostPhysics",
+      "crate_api": "CSChrDataModule",
+      "purpose": "Detect hits and kills by the player; apply enchantment damage",
+      "_verify": {
+        "access": "in game: an HP write to 0 plays the normal death and drops the normal runes"
+      }
+    },
+    {
+      "id": "debug_draw",
+      "game_object": "RendMan.debug_ez_draw",
+      "access": "draw",
+      "task_group": "ChrIns_PostPhysics",
+      "crate_api": "CSEzDraw::draw_capsule",
+      "purpose": "Loot beams in the world",
+      "_verify": {
+        "crate_api": "in game: ez_draw renders on the retail exe"
+      }
+    },
+    {
+      "id": "input_keys",
+      "game_object": "Win32 keyboard state",
+      "access": "os",
+      "task_group": "any",
+      "crate_api": "GetAsyncKeyState",
+      "purpose": "Mod keys from the controls sheet, only while the game window is focused"
+    },
+    {
+      "id": "mouse_cursor",
+      "game_object": "Win32 cursor + game window",
+      "access": "os",
+      "task_group": "any",
+      "crate_api": "GetCursorPos / ScreenToClient / GetClientRect",
+      "purpose": "Aim point under the mouse",
+      "_verify": {
+        "crate_api": "in game: Elden Ring re-centres the hidden cursor; if so, accumulate deltas into a virtual cursor"
+      }
+    },
+    {
+      "id": "item_names",
+      "game_object": "MsgRepository (GoodsName)",
+      "access": "read",
+      "task_group": "any",
+      "crate_api": "fallback: dungeons_name only",
+      "purpose": "Show the Elden Ring item each artifact is made from",
+      "_verify": {
+        "crate_api": "find a msg lookup in the crate; until then the hotbar shows the Paramdex name"
+      }
+    },
+    {
+      "id": "overlay",
+      "game_object": "D3D12 swap chain",
+      "access": "draw",
+      "task_group": "overlay",
+      "crate_api": "hudhook (ImGui)",
+      "purpose": "Hotbar, satchel, cursor, toasts, gear panel",
+      "_verify": {
+        "crate_api": "in game: hudhook's DX12 hook draws over Elden Ring 1.17.1"
+      }
+    },
+    {
+      "id": "save_file",
+      "game_object": "%APPDATA%/LandsBetweenDungeons/<character name>.json",
+      "access": "os",
+      "task_group": "any",
+      "crate_api": "std::fs + serde_json",
+      "purpose": "Owned artifacts, hotbar, enchantments per character; never touches ER0000.sl2 / .co2"
+    }
+  ]
+}

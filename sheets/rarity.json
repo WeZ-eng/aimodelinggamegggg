@@ -1,0 +1,22 @@
+{
+  "sheet": "rarity",
+  "about": "Dungeons-style rarity tiers for every drop. Colour is the loot beam and the toast text.",
+  "key": "id",
+  "columns": {
+    "id": {"type": "str"},
+    "label": {"type": "str"},
+    "tier": {"type": "int"},
+    "color_r": {"type": "float"},
+    "color_g": {"type": "float"},
+    "color_b": {"type": "float"},
+    "beam_height_m": {"type": "float"},
+    "beam_radius_m": {"type": "float"},
+    "enchant_level": {"type": "int", "doc": "level of the enchantment an enchant drop of this rarity gives"},
+    "roll_weight": {"type": "int"}
+  },
+  "rows": [
+    {"id": "common", "label": "Common", "tier": 1, "color_r": 0.92, "color_g": 0.92, "color_b": 0.92, "beam_height_m": 6.0, "beam_radius_m": 0.12, "enchant_level": 1, "roll_weight": 70},
+    {"id": "rare", "label": "Rare", "tier": 2, "color_r": 0.30, "color_g": 0.72, "color_b": 1.00, "beam_height_m": 9.0, "beam_radius_m": 0.16, "enchant_level": 2, "roll_weight": 25},
+    {"id": "unique", "label": "Unique", "tier": 3, "color_r": 1.00, "color_g": 0.68, "color_b": 0.12, "beam_height_m": 14.0, "beam_radius_m": 0.22, "enchant_level": 3, "roll_weight": 5}
+  ]
+}

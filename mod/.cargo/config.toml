@@ -1,0 +1,14 @@
+[build]
+target = "x86_64-pc-windows-gnu"
+
+[target.x86_64-pc-windows-gnu]
+# One self-contained DLL: no libstdc++ / libgcc / winpthread DLLs needed on the player's PC.
+rustflags = [
+  "-C", "target-feature=+crt-static",
+  "-L", "native=/usr/lib/gcc/x86_64-w64-mingw32/13-win32",
+  "-C", "link-args=-static -static-libgcc -static-libstdc++",
+]
+
+[env]
+# imgui-sys is C++; make the cc crate link libstdc++ statically instead of as a DLL.
+CXXSTDLIB = "static=stdc++"

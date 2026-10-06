@@ -1,0 +1,164 @@
+{
+  "sheet": "controls",
+  "about": "Every key the mashup reads. 'vanilla' rows are Elden Ring's own bindings the design relies on; the mod reads but never rebinds them.",
+  "key": "id",
+  "columns": {
+    "id": {
+      "type": "str"
+    },
+    "action": {
+      "type": "str"
+    },
+    "key_name": {
+      "type": "str"
+    },
+    "vk_code": {
+      "type": "int",
+      "doc": "Windows virtual-key code"
+    },
+    "trigger": {
+      "type": "enum",
+      "values": [
+        "press",
+        "hold",
+        "vanilla"
+      ]
+    },
+    "owner": {
+      "type": "enum",
+      "values": [
+        "mod",
+        "vanilla"
+      ]
+    },
+    "vanilla_conflict": {
+      "type": "str",
+      "doc": "what Elden Ring's default keyboard layout does with this key"
+    }
+  },
+  "rows": [
+    {
+      "id": "toggle_camera",
+      "action": "Switch Dungeons view / Elden Ring view",
+      "key_name": "F5",
+      "vk_code": 116,
+      "trigger": "press",
+      "owner": "mod",
+      "vanilla_conflict": "none known",
+      "_verify": {
+        "vanilla_conflict": "check Elden Ring Settings > Keyboard on 1.17.1"
+      }
+    },
+    {
+      "id": "zoom_in",
+      "action": "Camera closer",
+      "key_name": "=",
+      "vk_code": 187,
+      "trigger": "hold",
+      "owner": "mod",
+      "vanilla_conflict": "none known",
+      "_verify": {
+        "vanilla_conflict": "check Elden Ring Settings > Keyboard on 1.17.1"
+      }
+    },
+    {
+      "id": "zoom_out",
+      "action": "Camera further",
+      "key_name": "-",
+      "vk_code": 189,
+      "trigger": "hold",
+      "owner": "mod",
+      "vanilla_conflict": "none known",
+      "_verify": {
+        "vanilla_conflict": "check Elden Ring Settings > Keyboard on 1.17.1"
+      }
+    },
+    {
+      "id": "artifact_1",
+      "action": "Use hotbar slot 1",
+      "key_name": "1",
+      "vk_code": 49,
+      "trigger": "press",
+      "owner": "mod",
+      "vanilla_conflict": "none known",
+      "_verify": {
+        "vanilla_conflict": "check Elden Ring Settings > Keyboard on 1.17.1"
+      }
+    },
+    {
+      "id": "artifact_2",
+      "action": "Use hotbar slot 2",
+      "key_name": "2",
+      "vk_code": 50,
+      "trigger": "press",
+      "owner": "mod",
+      "vanilla_conflict": "none known",
+      "_verify": {
+        "vanilla_conflict": "check Elden Ring Settings > Keyboard on 1.17.1"
+      }
+    },
+    {
+      "id": "artifact_3",
+      "action": "Use hotbar slot 3",
+      "key_name": "3",
+      "vk_code": 51,
+      "trigger": "press",
+      "owner": "mod",
+      "vanilla_conflict": "none known",
+      "_verify": {
+        "vanilla_conflict": "check Elden Ring Settings > Keyboard on 1.17.1"
+      }
+    },
+    {
+      "id": "artifact_menu",
+      "action": "Open the artifact satchel to slot artifacts",
+      "key_name": "I",
+      "vk_code": 73,
+      "trigger": "press",
+      "owner": "mod",
+      "vanilla_conflict": "none known",
+      "_verify": {
+        "vanilla_conflict": "check Elden Ring Settings > Keyboard on 1.17.1"
+      }
+    },
+    {
+      "id": "satchel_next",
+      "action": "In the satchel: select the next artifact (then press 1, 2 or 3 to slot it)",
+      "key_name": "Tab",
+      "vk_code": 9,
+      "trigger": "press",
+      "owner": "mod",
+      "vanilla_conflict": "none known",
+      "_verify": {
+        "vanilla_conflict": "check Elden Ring Settings > Keyboard on 1.17.1"
+      }
+    },
+    {
+      "id": "aim_attack",
+      "action": "Right-hand attack; character turns toward the cursor first",
+      "key_name": "Left mouse",
+      "vk_code": 1,
+      "trigger": "hold",
+      "owner": "vanilla",
+      "vanilla_conflict": "Elden Ring default: attack (right hand)"
+    },
+    {
+      "id": "aim_guard",
+      "action": "Left-hand action / guard; character turns toward the cursor first",
+      "key_name": "Right mouse",
+      "vk_code": 2,
+      "trigger": "hold",
+      "owner": "vanilla",
+      "vanilla_conflict": "Elden Ring default: guard / left-hand attack"
+    },
+    {
+      "id": "roll",
+      "action": "Dodge-roll in the direction you move (screen-relative in Dungeons view)",
+      "key_name": "Space",
+      "vk_code": 32,
+      "trigger": "vanilla",
+      "owner": "vanilla",
+      "vanilla_conflict": "Elden Ring default: backstep / dodge roll / dash"
+    }
+  ]
+}

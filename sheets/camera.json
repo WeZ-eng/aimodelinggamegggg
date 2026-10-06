@@ -1,0 +1,63 @@
+{
+  "sheet": "camera",
+  "about": "Camera modes. One row per mode. The render camera (CSCamera.pers_cam_1) is overwritten every frame after CameraStep; the follow camera's yaw is pinned so stick/WASD movement is screen-relative.",
+  "key": "id",
+  "columns": {
+    "id": {"type": "str"},
+    "label": {"type": "str"},
+    "overrides_render": {"type": "bool"},
+    "pitch_deg": {"type": "float", "doc": "angle below horizontal; Dungeons is steep"},
+    "yaw_deg": {"type": "float", "doc": "fixed world yaw; 45 gives the Dungeons diagonal"},
+    "distance_m": {"type": "float"},
+    "distance_min_m": {"type": "float"},
+    "distance_max_m": {"type": "float"},
+    "zoom_step_m": {"type": "float"},
+    "fov_deg": {"type": "float"},
+    "target_height_m": {"type": "float", "doc": "look-at point above the player's feet"},
+    "follow_smoothing": {"type": "float", "doc": "0 = snap, 1 = never moves"},
+    "ceiling_mode": {"type": "enum", "values": ["none", "shorten"], "doc": "shorten = ray-cast from player to camera and pull in under ceilings (caves, catacombs, legacy dungeons)"},
+    "ceiling_margin_m": {"type": "float"},
+    "toggle_control": {"type": "ref", "ref": "controls"}
+  },
+  "rows": [
+    {
+      "id": "dungeons",
+      "label": "Dungeons view",
+      "overrides_render": true,
+      "pitch_deg": 55.0,
+      "yaw_deg": 45.0,
+      "distance_m": 16.0,
+      "distance_min_m": 9.0,
+      "distance_max_m": 26.0,
+      "zoom_step_m": 1.5,
+      "fov_deg": 40.0,
+      "target_height_m": 1.2,
+      "follow_smoothing": 0.15,
+      "ceiling_mode": "shorten",
+      "ceiling_margin_m": 0.6,
+      "toggle_control": "toggle_camera",
+      "_verify": {
+        "overrides_render": "in game: writing pers_cam_1.matrix in DrawParamUpdate changes the rendered view (screenshot)",
+        "fov_deg": "in game: CSCam.fov unit is radians or degrees; log the vanilla value first",
+        "ceiling_mode": "in game: CSPhysWorld::cast_ray filter that hits ceilings in a catacomb"
+      }
+    },
+    {
+      "id": "vanilla",
+      "label": "Elden Ring view",
+      "overrides_render": false,
+      "pitch_deg": 0.0,
+      "yaw_deg": 0.0,
+      "distance_m": 0.0,
+      "distance_min_m": 0.0,
+      "distance_max_m": 0.0,
+      "zoom_step_m": 0.0,
+      "fov_deg": 0.0,
+      "target_height_m": 0.0,
+      "follow_smoothing": 0.0,
+      "ceiling_mode": "none",
+      "ceiling_margin_m": 0.0,
+      "toggle_control": "toggle_camera"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+[package]
+name = "lands_between_dungeons"
+version = "0.1.0"
+edition = "2024"
+publish = false
+description = "Minecraft Dungeons inside Elden Ring: top-down camera, cursor aim, artifact hotbar, enchanted loot. Loaded by ModEngine2."
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+eldenring = { git = "https://github.com/vswarte/fromsoftware-rs", rev = "59fbd3b3b7daaf14aca47c9f73530493dba6bc79" }
+fromsoftware-shared = { git = "https://github.com/vswarte/fromsoftware-rs", rev = "59fbd3b3b7daaf14aca47c9f73530493dba6bc79" }
+pelite = "0.10"
+hudhook = { version = "=0.9.3", default-features = false, features = ["dx12", "inject"] }
+glam = "0.30"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.9"
+windows = { version = "0.61", features = [
+  "Win32_Foundation",
+  "Win32_UI_WindowsAndMessaging",
+  "Win32_UI_Input_KeyboardAndMouse",
+  "Win32_Graphics_Gdi",
+  "Win32_System_LibraryLoader",
+  "Win32_System_SystemServices",
+] }
+
+[profile.release]
+lto = "thin"
+# unwind so a panic in a frame task is caught and only disables the mod

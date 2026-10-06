@@ -1,0 +1,22 @@
+{
+  "sheet": "ui",
+  "about": "Everything the mod draws. Overlay rows are ImGui windows drawn by hudhook; the beam is drawn into the world.",
+  "key": "id",
+  "columns": {
+    "id": {"type": "str"},
+    "kind": {"type": "enum", "values": ["overlay", "world"]},
+    "anchor": {"type": "enum", "values": ["bottom_center", "top_center", "right_center", "cursor", "world"]},
+    "offset_x_px": {"type": "int"},
+    "offset_y_px": {"type": "int"},
+    "shown_when": {"type": "str"},
+    "hook": {"type": "ref", "ref": "hooks"},
+    "contents": {"type": "str"}
+  },
+  "rows": [
+    {"id": "hotbar", "kind": "overlay", "anchor": "bottom_center", "offset_x_px": 0, "offset_y_px": -120, "shown_when": "Dungeons view on", "hook": "overlay", "contents": "3 slots: key, artifact name, Elden Ring item, cooldown sweep, FP cost"},
+    {"id": "satchel", "kind": "overlay", "anchor": "right_center", "offset_x_px": -40, "offset_y_px": 0, "shown_when": "artifact_menu toggled", "hook": "overlay", "contents": "Owned artifacts; click one then a slot to equip it; shows gear enchantments"},
+    {"id": "toast", "kind": "overlay", "anchor": "top_center", "offset_x_px": 0, "offset_y_px": 90, "shown_when": "4 s after a pickup", "hook": "overlay", "contents": "Rarity-coloured line: 'Rare  Sharpness II  on Longsword'"},
+    {"id": "reticle", "kind": "overlay", "anchor": "cursor", "offset_x_px": 0, "offset_y_px": 0, "shown_when": "Dungeons view on", "hook": "overlay", "contents": "Ring where the next attack or artifact aims"},
+    {"id": "loot_beam", "kind": "world", "anchor": "world", "offset_x_px": 0, "offset_y_px": 0, "shown_when": "a drop is waiting", "hook": "debug_draw", "contents": "Vertical capsule in the rarity colour at the body"}
+  ]
+}
