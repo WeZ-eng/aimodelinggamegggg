@@ -2,6 +2,20 @@
 
 Journal for whoever continues this (human or agent). Newest first.
 
+## 2026-10-06: on Melty as a private draft
+
+- Melty connected after `melty.gg` was allowed. Melty's notes on Elden Ring: ModEngine2 release-2.1.0 is installed by Melty, launched as
+  `{managed}/modengine2/modengine2_launcher.exe -t er -c config_eldenring.toml`. The one live Elden Ring mashup
+  (ER Mario) pins `>=2.7.1.0 <=2.7.1.1`; we do the same.
+- Seamless Co-op can't be bundled (Nexus permissions), and an external requirement blocks one click → excluded.
+  The user chose: solo test build first, then our own co-op over Steam lobbies, listed as co-op once stage A
+  (see each other) works.
+- Package: `config_eldenring.toml` → `{managed}/modengine2` (external_dlls = lands_between_dungeons\\lands_between_dungeons.dll),
+  `lands_between_dungeons/` → `{managed}/modengine2/lands_between_dungeons`. validate_recipe: valid. one_click_check: yes.
+- Draft modId `b552045f-c9aa-45a2-b268-1297a4b62ce1` (slug lands-between-dungeons), release 0.1.0 = draft,
+  upload sha256 83c96aaf…f36f. Waiting on the user's Test in the Melty app.
+- Open: the content license and remix choice (user), melty.json in the repo (after the user agrees).
+
 ## 2026-10-06: first build (cloud container, no game)
 
 **Where:** a Linux cloud container. Neither Elden Ring nor Minecraft Dungeons II is installed here, and
