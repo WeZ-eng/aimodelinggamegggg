@@ -2,7 +2,7 @@
 
 **Minecraft Dungeons inside Elden Ring.** Play Elden Ring from a Dungeons-style overhead camera, aim with the
 mouse, fire Dungeons artifacts from a hotbar, and pick up enchanted loot from coloured beams, alone or with
-up to 3 friends through Seamless Co-op.
+solo for now (co-op is planned, see below).
 
 > **Status: built, not yet tested in the game.** The DLL compiles, its unit tests pass, and it loads safely
 > (an unsupported game build leaves it inactive). Nothing has run inside Elden Ring yet, and nothing is on Melty.
@@ -18,7 +18,7 @@ up to 3 friends through Seamless Co-op.
 | **Moving and aiming** | WASD moves relative to the screen. Your character turns toward the mouse cursor when you attack (`LMB`/`RMB`) or use an artifact. `Space` is Elden Ring's own dodge-roll. |
 | **Artifact hotbar** | `1` `2` `3` fire the artifact in that slot; `I` opens the satchel to slot them (`Tab` selects, then `1`/`2`/`3`). |
 | **Enchanted loot** | Killing enemies can drop a Common / Rare / Unique loot beam. Walk into it for an artifact or an enchantment on your weapon or chest armour. Your first kill always drops an artifact. |
-| **Co-op** | Up to 4 players with Seamless Co-op (LukeYui), joined in game with a shared password. Everyone needs the same release. |
+| **Co-op** | Not in this version. Seamless Co-op can't be bundled (its author doesn't allow redistribution), and Melty only publishes what installs in one click. Co-op comes in an update if LukeYui allows bundling, or through co-op built into the mod. |
 
 ### Artifacts (Dungeons artifact → the Elden Ring item it's made from)
 
